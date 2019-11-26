@@ -1,0 +1,80 @@
+[2019-11-26T15:21:59.926] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T15:22:00.018] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T15:22:00.600] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T15:22:00.600] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T15:22:00.601] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T15:22:00.601] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T15:22:00.636] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T15:22:00.639] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T15:22:00.639] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T15:22:00.640] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T18:46:42.431] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T18:46:42.515] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T18:46:43.048] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T18:46:43.048] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T18:46:43.049] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T18:46:43.049] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T18:46:43.080] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T18:46:43.083] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T18:46:43.083] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T18:46:43.085] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T18:47:31.615] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T18:47:31.691] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T18:47:32.109] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T18:47:32.109] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T18:47:32.109] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T18:47:32.110] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T18:47:32.136] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T18:47:32.138] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T18:47:32.139] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T18:47:32.141] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T18:51:35.303] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T18:51:35.370] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T18:51:35.787] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T18:51:35.788] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T18:51:35.788] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T18:51:35.788] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T18:51:35.814] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T18:51:35.816] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T18:51:35.817] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T18:51:35.818] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T19:00:55.412] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T19:00:55.590] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:00:56.126] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T19:00:56.127] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:00:56.130] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T19:00:56.132] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T19:00:56.178] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T19:00:56.181] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T19:00:56.182] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T19:00:56.186] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T19:24:16.545] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T19:24:16.722] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:24:17.469] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T19:24:17.471] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:24:17.473] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T19:24:17.474] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T19:24:17.514] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T19:24:17.517] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T19:24:17.518] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T19:24:17.522] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T19:25:17.815] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T19:25:17.988] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:25:18.510] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T19:25:18.511] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:25:18.513] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T19:25:18.514] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T19:25:18.559] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T19:25:18.562] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T19:25:18.563] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T19:25:18.567] [INFO] NestApplication - Nest application successfully started
+[2019-11-26T19:25:46.067] [INFO] NestFactory - Starting Nest application...
+[2019-11-26T19:25:46.135] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:25:46.756] [INFO] InstanceLoader - TypeOrmCoreModule dependencies initialized
+[2019-11-26T19:25:46.756] [INFO] InstanceLoader - TypeOrmModule dependencies initialized
+[2019-11-26T19:25:46.757] [INFO] InstanceLoader - AppModule dependencies initialized
+[2019-11-26T19:25:46.757] [INFO] InstanceLoader - UserModule dependencies initialized
+[2019-11-26T19:25:46.782] [INFO] RoutesResolver - UserController {/user}:
+[2019-11-26T19:25:46.785] [INFO] RouterExplorer - Mapped {/add, POST} route
+[2019-11-26T19:25:46.786] [INFO] RouterExplorer - Mapped {/fetch, GET} route
+[2019-11-26T19:25:46.787] [INFO] NestApplication - Nest application successfully started
