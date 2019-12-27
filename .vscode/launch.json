@@ -10,6 +10,9 @@
             "name": "启动程序",
             "program": "${workspaceFolder}/src/main.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
+            "sourceMaps": true,
+            "protocol": "inspector",
+            "console": "integratedTerminal",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
             ]

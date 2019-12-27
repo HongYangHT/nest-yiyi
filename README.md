@@ -1,3 +1,10 @@
+<!--
+ * @Author: sam.hongyang
+ * @LastEditors: sam.hongyang
+ * @Description: 
+ * @Date: 2019-11-08 20:51:05
+ * @LastEditTime: 2019-12-27 17:20:46
+ -->
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
@@ -70,6 +77,16 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
+
+## deploy with pm2
+
+`cd project` and run `pm2 start npm --name xx --start`
+
 ## License
 
   Nest is [MIT licensed](LICENSE).
+
+
+#### git tag 
+
+> git tag -a 1.0.0 

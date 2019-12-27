@@ -1,4 +1,4 @@
 {
-    "debug.node.autoAttach": "off",
+    "debug.node.autoAttach": "on",
     "git.ignoreLimitWarning": true
 }
