@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 入口文件
  * @Date: 2019-11-08 20:51:05
- * @LastEditTime: 2019-12-11 17:07:55
+ * @LastEditTime: 2020-04-28 16:40:49
  */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -11,7 +11,7 @@ import { Log4jsService } from '@quickts/nestjs-log4js';
 import * as helmet from 'helmet';
 import * as csurf from 'csurf';
 import * as rateLimit from 'express-rate-limit';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import ValidatePipe from './utils/validate.pipe';
 import ExceptionsFilter from './utils/exception.filter';
 import ResponseInterceptor from './utils/response.interceptor';
@@ -34,13 +34,13 @@ async function bootstrap() {
       max: 100, // limit each IP to 100 requests per windowMs
     }),
   );
-  const options = new DocumentBuilder()
-    .setTitle('yiyi')
-    .setDescription('The yiyi API Description')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  // const options = new DocumentBuilder()
+  //   .setTitle('yiyi')
+  //   .setDescription('The yiyi API Description')
+  //   .setVersion('1.0')
+  //   .build();
+  // const document = SwaggerModule.createDocument(app, options);
+  // SwaggerModule.setup('api', app, document);
   await app.listen(9000);
 }
 bootstrap();
