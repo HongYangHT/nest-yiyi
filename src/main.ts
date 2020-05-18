@@ -3,14 +3,14 @@
  * @LastEditors: sam.hongyang
  * @Description: 入口文件
  * @Date: 2019-11-08 20:51:05
- * @LastEditTime: 2020-05-13 14:18:23
+ * @LastEditTime: 2020-05-18 15:53:12
  */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Log4jsService } from '@quickts/nestjs-log4js';
-import * as helmet from 'helmet';
-// import * as csurf from 'csurf';
-import * as rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+// import csurf from 'csurf';
+import rateLimit from 'express-rate-limit';
 // import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import ValidatePipe from './utils/validate.pipe';
 import ExceptionsFilter from './utils/exception.filter';

@@ -3,12 +3,12 @@
  * @LastEditors: sam.hongyang
  * @Description: base entity
  * @Date: 2019-11-09 01:09:14
- * @LastEditTime: 2020-05-13 14:46:00
+ * @LastEditTime: 2020-05-18 15:54:18
  */
 import { PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from 'typeorm';
 import { Exclude, Transform } from 'class-transformer';
-import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
 export class Base {
