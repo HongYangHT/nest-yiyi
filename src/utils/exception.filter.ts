@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 异常过滤器
  * @Date: 2019-11-30 20:50:37
- * @LastEditTime: 2019-11-30 21:18:54
+ * @LastEditTime: 2020-05-13 12:00:33
  */
 import {
   Catch,
@@ -18,7 +18,6 @@ export default class ExceptionsFilter implements ExceptionFilter {
   async catch(exception, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
-    const request = ctx.getRequest();
 
     let message = exception.message;
     let isDeepestMessage = false;

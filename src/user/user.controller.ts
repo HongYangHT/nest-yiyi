@@ -3,13 +3,16 @@
  * @LastEditors: sam.hongyang
  * @Description: user service
  * @Date: 2019-11-08 21:56:54
- * @LastEditTime: 2020-04-28 16:21:27
+ * @LastEditTime: 2020-05-11 11:17:23
  */
-import { Controller, Post, Body, Res, HttpStatus, Get, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './user.dto';
+import { classToPlain } from 'class-transformer';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
+@UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Post('add')
@@ -20,7 +23,7 @@ export class UserController {
       code: HttpStatus.CREATED,
       success: '请求完成',
       data: {
-        user,
+        user: classToPlain(user),
       },
     });
   }
@@ -32,7 +35,7 @@ export class UserController {
       code: HttpStatus.OK,
       success: '请求成功',
       data: {
-        user,
+        user: classToPlain(user),
       },
     });
   }

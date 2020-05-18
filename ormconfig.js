@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 
  * @Date: 2019-11-08 21:34:59
- * @LastEditTime: 2019-11-30 20:36:22
+ * @LastEditTime: 2020-04-28 18:21:21
  */
 const SOURCE_PATH = process.env.NODE_ENV === 'production' ? 'dist' : 'src'
 module.exports = {
@@ -18,6 +18,10 @@ module.exports = {
   "charset": "utf8mb4",
   "synchronize": process.env.NODE_ENV === 'production' ? false : true,
   "logging": "all",
+  "migrations": ["migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "migrations"
+  },
   "logger": "advanced-console",
   "maxQueryExecutionTime": 10000
 }
