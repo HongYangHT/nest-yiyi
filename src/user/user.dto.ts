@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: user dto
  * @Date: 2019-11-08 23:01:16
- * @LastEditTime: 2019-11-29 18:11:35
+ * @LastEditTime: 2020-05-20 16:57:58
  */
 import { Base } from '../base/base.dto';
 import { IsString, Length } from 'class-validator';
@@ -13,7 +13,7 @@ export class UserDto extends Base {
   readonly username: string;
 
   @IsString({ message: '用户昵称必须为字符串' })
-  @Length(1, 20, { message: '用户昵称不能为空' })
+  @Length(0, 20, { message: '用户昵称不能为空' })
   readonly nickName: string;
 
   @IsString({ message: '用户密码必须为字符串' })

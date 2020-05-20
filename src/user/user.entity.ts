@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: user entity
  * @Date: 2019-11-08 21:50:39
- * @LastEditTime: 2020-05-09 17:59:17
+ * @LastEditTime: 2020-05-18 18:00:57
  */
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Base } from '../base/base.entity';
@@ -17,7 +17,7 @@ export class User extends Base {
   @Column('varchar', { length: 160, comment: '昵称' })
   nickName: string;
 
-  @Exclude({ toPlainOnly: true })
   @Column('varchar', { length: 160, comment: '密码' })
+  @Exclude({ toPlainOnly: true })
   password: string;
 }
