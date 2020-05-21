@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:34
- * @LastEditTime: 2020-05-21 10:39:36
+ * @LastEditTime: 2020-05-21 11:48:28
  */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -104,7 +104,12 @@ export class AuthService {
         try {
             const fetchToken = await axios.post('https://github.com/login/oauth/access_token', {
                 ...query,
-                client_secret: process.env.NODE_ENV === 'production' ? config.production.client_secret : config.client_secret,
+                client_secret: config.production.client_secret,
+            });
+
+            this.myLoggerService.write({
+                ...query,
+                client_secret: config.production.client_secret,
             });
             const githubUser = await axios.get(`https://api.github.com/user?${fetchToken.data}`);
             const searchUser = await this.userService.findOne(githubUser.data.login);
