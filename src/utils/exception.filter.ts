@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 异常过滤器
  * @Date: 2019-11-30 20:50:37
- * @LastEditTime: 2020-05-13 12:00:33
+ * @LastEditTime: 2020-05-20 20:02:06
  */
 import {
   Catch,
@@ -15,7 +15,7 @@ import {
 
 @Catch()
 export default class ExceptionsFilter implements ExceptionFilter {
-  async catch(exception, host: ArgumentsHost) {
+  catch(exception, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
 

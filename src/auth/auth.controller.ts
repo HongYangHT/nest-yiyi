@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:57
- * @LastEditTime: 2020-05-20 17:29:01
+ * @LastEditTime: 2020-05-21 09:59:15
  */
 import { Controller, Request, Post, UseGuards, Get, Body, Res, HttpStatus, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -12,6 +12,7 @@ import { classToPlain, plainToClass } from 'class-transformer';
 import { UserDto } from '../user/user.dto';
 import bcrypt from 'bcrypt';
 import { User } from '../user/user.entity';
+import { AuthGithub } from './auth.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -49,7 +50,7 @@ export class AuthController {
      * @param req request
      */
     @Get('login/github')
-    async loginWithGithub(@Query() query) {
+    async loginWithGithub(@Query() query: AuthGithub) {
         return this.authService.loginWithGithub(query);
     }
 

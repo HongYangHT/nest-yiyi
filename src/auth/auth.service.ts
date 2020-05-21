@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:34
- * @LastEditTime: 2020-05-20 19:44:10
+ * @LastEditTime: 2020-05-21 10:39:36
  */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -14,12 +14,14 @@ import { ErrorCode } from '../utils/error-code';
 import { config } from '../utils/github.token';
 import axios from 'axios';
 import { User } from '../user/user.entity';
+import { MyLoggerService } from '../utils/log';
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly userService: UserService,
         private readonly jwtService: JwtService,
+        private readonly myLoggerService: MyLoggerService,
     ) {}
     /**
      * 用于本地登录验证
@@ -98,20 +100,32 @@ export class AuthService {
         if (!client_id) {
             throw new HttpException({ message: 'client_id 值不存在', status: ErrorCode.CLIENT_ID_NOT_FOUND }, HttpStatus.OK);
         }
-        const fetchToken = await axios.post('https://github.com/login/oauth/access_token', {
-            ...query,
-            client_secret: process.env.NODE_ENV === 'production' ? config.production.client_secret : config.client_secret,
-        });
-        const githubUser = await axios.get(`https://api.github.com/user?${fetchToken.data}`);
 
-        const searchUser = await this.userService.findOne(githubUser.data.login);
-        // NOTE: 用户存在，他有可能是用户名一样
-        if (searchUser) {
-            const match = await bcrypt.compare(githubUser.data.id + '' , searchUser.password);
-            if (match) {
-                // tslint:disable-next-line:no-shadowed-variable
-                const { password, ...result } = searchUser;
-                return result;
+        try {
+            const fetchToken = await axios.post('https://github.com/login/oauth/access_token', {
+                ...query,
+                client_secret: process.env.NODE_ENV === 'production' ? config.production.client_secret : config.client_secret,
+            });
+            const githubUser = await axios.get(`https://api.github.com/user?${fetchToken.data}`);
+            const searchUser = await this.userService.findOne(githubUser.data.login);
+            // NOTE: 用户存在，他有可能是用户名一样
+            if (searchUser) {
+                const match = await bcrypt.compare(githubUser.data.id + '' , searchUser.password);
+                if (match) {
+                    // tslint:disable-next-line:no-shadowed-variable
+                    const { password, ...result } = searchUser;
+                    return result;
+                } else {
+                    // NOTE: 建一个用户
+                    const salt = bcrypt.genSaltSync(10);
+                    const user = plainToClass(User, {
+                        username: githubUser.data.login,
+                        password: bcrypt.hashSync(githubUser.data.id + '', salt),
+                        nickName: githubUser.data.login,
+                    });
+                    const userItem = await this.userService.create(user);
+                    return classToPlain(plainToClass(User, userItem));
+                }
             } else {
                 // NOTE: 建一个用户
                 const salt = bcrypt.genSaltSync(10);
@@ -123,16 +137,10 @@ export class AuthService {
                 const userItem = await this.userService.create(user);
                 return classToPlain(plainToClass(User, userItem));
             }
-        } else {
-            // NOTE: 建一个用户
-            const salt = bcrypt.genSaltSync(10);
-            const user = plainToClass(User, {
-                username: githubUser.data.login,
-                password: bcrypt.hashSync(githubUser.data.id + '', salt),
-                nickName: githubUser.data.login,
-            });
-            const userItem = await this.userService.create(user);
-            return classToPlain(plainToClass(User, userItem));
+        } catch (error) {
+            this.myLoggerService.write(error);
+            throw new HttpException({ message: '授权登录报错', status: ErrorCode.AUTH_NOT_ACCESS }, HttpStatus.OK);
         }
+
     }
 }
