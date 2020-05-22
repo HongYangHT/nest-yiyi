@@ -3,9 +3,9 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:57
- * @LastEditTime: 2020-05-21 09:59:15
+ * @LastEditTime: 2020-05-21 15:10:26
  */
-import { Controller, Request, Post, UseGuards, Get, Body, Res, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get, Body, Res, HttpStatus, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { classToPlain, plainToClass } from 'class-transformer';
@@ -35,7 +35,10 @@ export class AuthController {
             ...userDto,
             password: bcrypt.hashSync(userDto.password, salt),
         };
-        const user = await this.authService.signin(userDto);
+        const user = await this.authService.signin({
+            ...userDto,
+            from: 1,
+        });
         res.status(HttpStatus.CREATED).send({
             status: HttpStatus.OK,
             success: '请求完成',
@@ -50,6 +53,7 @@ export class AuthController {
      * @param req request
      */
     @Get('login/github')
+    @UsePipes(new ValidationPipe({ transform: true }))
     async loginWithGithub(@Query() query: AuthGithub) {
         return this.authService.loginWithGithub(query);
     }

@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:34
- * @LastEditTime: 2020-05-21 11:48:28
+ * @LastEditTime: 2020-05-21 14:01:03
  */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -119,7 +119,11 @@ export class AuthService {
                 if (match) {
                     // tslint:disable-next-line:no-shadowed-variable
                     const { password, ...result } = searchUser;
-                    return result;
+                    const payload = { username: result.username, sub: result.id };
+                    return {
+                        ...result,
+                        access_token: this.jwtService.sign(payload),
+                    };
                 } else {
                     // NOTE: 建一个用户
                     const salt = bcrypt.genSaltSync(10);
@@ -127,9 +131,15 @@ export class AuthService {
                         username: githubUser.data.login,
                         password: bcrypt.hashSync(githubUser.data.id + '', salt),
                         nickName: githubUser.data.login,
+                        avatar: githubUser.data.avatar_url,
+                        from: 2,
                     });
                     const userItem = await this.userService.create(user);
-                    return classToPlain(plainToClass(User, userItem));
+                    const payload = { username: userItem.username, sub: userItem.id };
+                    return {
+                        ...classToPlain(plainToClass(User, userItem)),
+                        access_token: this.jwtService.sign(payload),
+                    };
                 }
             } else {
                 // NOTE: 建一个用户
@@ -138,9 +148,15 @@ export class AuthService {
                     username: githubUser.data.login,
                     password: bcrypt.hashSync(githubUser.data.id + '', salt),
                     nickName: githubUser.data.login,
+                    avatar: githubUser.data.avatar_url,
+                    from: 2,
                 });
                 const userItem = await this.userService.create(user);
-                return classToPlain(plainToClass(User, userItem));
+                const payload = { username: userItem.username, sub: userItem.id };
+                return {
+                    ...classToPlain(plainToClass(User, userItem)),
+                    access_token: this.jwtService.sign(payload),
+                };
             }
         } catch (error) {
             this.myLoggerService.write(error);

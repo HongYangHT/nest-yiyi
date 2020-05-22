@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-18 17:05:50
- * @LastEditTime: 2020-05-21 09:39:16
+ * @LastEditTime: 2020-05-21 16:56:05
  */
 export enum ErrorCode {
     USER_NOT_FOUND = '10001',
@@ -11,4 +11,5 @@ export enum ErrorCode {
     CODE_NOT_FOUND = '10003',
     CLIENT_ID_NOT_FOUND = '10004',
     AUTH_NOT_ACCESS = '10005',
+    USER_OR_ROLE_NOT_FOUND = '10006',
 }
