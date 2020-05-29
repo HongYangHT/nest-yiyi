@@ -11,6 +11,8 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "noEmit": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["**/*.d.ts", "dist", "node_modules"]
 }

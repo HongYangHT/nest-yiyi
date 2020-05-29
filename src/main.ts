@@ -1,9 +1,9 @@
-// /*
+/*
  * @Author: sam.hongyang
  * @LastEditors: sam.hongyang
  * @Description: 入口文件
  * @Date: 2019-11-08 20:51:05
- * @LastEditTime: 2020-05-18 15:53:12
+ * @LastEditTime: 2020-05-29 11:09:04
  */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -22,7 +22,9 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   app.useGlobalFilters(new ExceptionsFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
-  app.useGlobalPipes(new ValidatePipe());
+  app.useGlobalPipes(
+    new ValidatePipe(),
+  );
   app.use(helmet());
   app.enableCors();
   // app.use(csurf({

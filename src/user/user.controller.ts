@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: user service
  * @Date: 2019-11-08 21:56:54
- * @LastEditTime: 2020-05-20 17:24:07
+ * @LastEditTime: 2020-05-29 16:43:02
  */
 import { Controller, Post, Body, Res, HttpStatus, Get, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -26,7 +26,7 @@ export class UserController {
       ...userDto,
       password: bcrypt.hashSync(userDto.password, salt),
     };
-    const user: UserDto = await this.userService.create(userDto);
+    const user: User = await this.userService.create(userDto);
     res.status(HttpStatus.CREATED).send({
       status: HttpStatus.OK,
       success: '请求完成',
@@ -38,7 +38,7 @@ export class UserController {
 
   @Get('fetch')
   async findAll(@Res() res) {
-    const user: UserDto[] = await this.userService.findAll();
+    const user: User[] = await this.userService.findAll();
     res.status(HttpStatus.OK).send({
       status: HttpStatus.OK,
       success: '请求成功',

@@ -3,11 +3,10 @@
  * @LastEditors: sam.hongyang
  * @Description: 验证管道
  * @Date: 2019-11-26 16:27:16
- * @LastEditTime: 2019-11-29 18:12:31
+ * @LastEditTime: 2020-05-29 15:20:42
  */
 import {
   PipeTransform,
-  Pipe,
   ArgumentMetadata,
   BadRequestException,
   Injectable,
