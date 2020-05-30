@@ -3,9 +3,9 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:16:18
- * @LastEditTime: 2020-05-21 10:41:21
+ * @LastEditTime: 2020-05-30 11:56:40
  */
-import { Module } from '@nestjs/common';
+import { Module, HttpModule } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
@@ -17,7 +17,7 @@ import { AuthController } from './auth.controller';
 import { MyLoggerService } from '../utils/log';
 
 @Module({
-    imports: [UserModule, PassportModule, JwtModule.register({
+    imports: [UserModule, HttpModule, PassportModule, JwtModule.register({
         secret: jwtConstants.secret,
         signOptions: { expiresIn: '1y' },
     })],
