@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 17:05:13
- * @LastEditTime: 2020-05-30 16:08:42
+ * @LastEditTime: 2020-06-01 09:45:24
  */ 
 import { Injectable, Logger, ValidationPipe, UsePipes } from '@nestjs/common';
 import { TopicDto } from '../topic/topic.dto';
@@ -28,7 +28,7 @@ export class SpiderParserService {
             const item: TopicDto = Object.assign(topic, {
                 title: $(ele).find('.news__item-title').text().trim(),
                 content: $(ele).find('.article-excerpt').text().trim(),
-                url: 'https://segmentfault.com/' + ($(ele).find('.news-img').attr('href') || $(ele).find('.news__item-info>a').attr('href')),
+                url: 'https://segmentfault.com' + ($(ele).find('.news-img').attr('href') || $(ele).find('.news__item-info>a').attr('href')),
                 commit: $(ele).find('.author').text().trim(),
             });
             items.push(item);

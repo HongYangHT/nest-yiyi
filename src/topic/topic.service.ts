@@ -3,13 +3,14 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 16:16:15
- * @LastEditTime: 2020-05-30 16:44:15
+ * @LastEditTime: 2020-06-01 15:58:13
  */ 
 import { Topic } from './topic.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Like, Transaction, TransactionManager, EntityManager, TransactionRepository } from 'typeorm';
 import { ErrorCode } from '../utils/error-code';
+import { User } from '../user/user.entity';
 
 interface Query {
     page?: number;
@@ -17,11 +18,20 @@ interface Query {
     keyword?: string;
 }
 
+interface AuthDto {
+    id: string;
+    username?: string;
+}
+
+interface UpdateVisitDto {
+    id: string;
+}
+
 @Injectable()
 export class TopicService {
     constructor(
         @InjectRepository(Topic)
-        private readonly topicRepository: Repository<Topic>,
+        private readonly topicRepository: Repository<Topic>
     ) {}
 
     async create(topic: Topic): Promise<Topic> {
@@ -42,23 +52,50 @@ export class TopicService {
         // return await this.topicRepository.findAndCount({
         //     skip: (+query.page - 1) * +query.pageSize,
         //     take: +query.pageSize,
+        //     where: {
+        //         title: Like(`${query.keyword}`),
+        //     },
         // });
+
         if (query.keyword) {
             return await this.topicRepository.createQueryBuilder('topic')
                 .where('topic.title like :param')
                 .setParameters({
                     param: `%${query.keyword}%`,
                 })
-                .offset((+query.page - 1) * + query.pageSize)
-                .take(+query.pageSize)
+                .offset((+query.page - 1) * +query.pageSize)
+                .limit(+query.pageSize)
+                .leftJoinAndSelect('topic.users', 'users')
                 .orderBy('topic.updated', 'DESC')
                 .getManyAndCount();
         } else {
             return await this.topicRepository.createQueryBuilder('topic')
-                .offset((+query.page - 1) * + query.pageSize)
-                .take(+query.pageSize)
-                .orderBy('topic.updated', 'DESC')
-                .getManyAndCount();
+            .offset((+query.page - 1) * +query.pageSize)
+            .limit(+query.pageSize)
+            .leftJoinAndSelect('topic.users', 'users')
+            .orderBy('topic.updated', 'DESC')
+            .getManyAndCount();
         }
+    }
+
+    @Transaction()
+    async updateVisit(user: AuthDto, query: UpdateVisitDto, @TransactionManager() manager?: EntityManager): Promise<void> {
+        const userId = user.id;
+        const topicId = query.id;
+
+        const userItem = await manager.findOne(User, userId);
+
+        const topic = await manager.findOne(Topic, topicId, {
+            relations: ['users'],
+        });
+
+        if (!userItem || !topic) {
+            throw new HttpException({ message: '用户或文章不存在', status: ErrorCode.USER_OR_TOPIC_NOT_FOUND }, HttpStatus.OK);
+        }
+
+        topic.users = [...topic.users, userItem];
+        topic.visit += 1;
+        await manager.save(topic);
+        await manager.save(Topic, topic);
     }
 }

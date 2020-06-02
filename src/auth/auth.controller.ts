@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:57
- * @LastEditTime: 2020-05-21 15:10:26
+ * @LastEditTime: 2020-06-01 16:19:25
  */
 import { Controller, Request, Post, UseGuards, Get, Body, Res, HttpStatus, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -37,7 +37,7 @@ export class AuthController {
         };
         const user = await this.authService.signin({
             ...userDto,
-            from: 1,
+            from: '1',
         });
         res.status(HttpStatus.CREATED).send({
             status: HttpStatus.OK,

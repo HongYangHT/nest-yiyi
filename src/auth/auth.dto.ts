@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-21 09:53:45
- * @LastEditTime: 2020-05-21 14:56:05
+ * @LastEditTime: 2020-06-01 10:45:28
  */
 import { IsString, Length } from 'class-validator';
 export class AuthGithub {

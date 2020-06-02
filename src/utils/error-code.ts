@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-18 17:05:50
- * @LastEditTime: 2020-05-28 19:45:45
+ * @LastEditTime: 2020-06-01 11:00:52
  */
 export enum ErrorCode {
     USER_NOT_FOUND = '10001',
@@ -13,6 +13,10 @@ export enum ErrorCode {
     AUTH_NOT_ACCESS = '10005',
     USER_OR_ROLE_NOT_FOUND = '10006',
 
+    USER_OR_TOPIC_NOT_FOUND = '10007',
+
     // 验证信息
     USERNAME_IS_EMPTY = '20001',
+
+
 }

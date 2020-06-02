@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-21 14:50:58
- * @LastEditTime: 2020-05-29 20:33:17
+ * @LastEditTime: 2020-06-01 15:59:42
  */ 
 import { Controller, UseGuards, Res, Post, Body, ValidationPipe, UsePipes, HttpStatus } from '@nestjs/common';
 import { RoleService } from './role.service';
@@ -11,7 +11,6 @@ import { RoleDto } from './role.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from './role.entity';
 import { classToPlain, plainToClass } from 'class-transformer';
-import { Transaction, TransactionManager, EntityManager, TransactionRepository } from 'typeorm';
 import { UserService } from '../user/user.service';
 
 @Controller('role')
@@ -34,7 +33,7 @@ export class RoleController {
     }
 
     @Post('bind')
-    async bind(@TransactionManager() manager: EntityManager, @Body() body) {
-        return await this.roleService.bind(body, manager);
+    async bind(@Body() body) {
+        return await this.roleService.bind(body);
     }
 }

@@ -3,12 +3,13 @@
  * @LastEditors: sam.hongyang
  * @Description: user dto
  * @Date: 2019-11-08 23:01:16
- * @LastEditTime: 2020-05-28 19:51:32
+ * @LastEditTime: 2020-06-01 16:22:31
  */
 import { Base } from '../base/base.dto';
 import { IsString, Length, Validate } from 'class-validator';
 import { Role } from '../role/role.entity';
 import { ErrorCode } from '../utils/error-code';
+import { Topic } from '../topic/topic.entity';
 export class UserDto extends Base {
   @IsString()
   @Length(1, 20, {
@@ -26,7 +27,6 @@ export class UserDto extends Base {
   })
   readonly username: string;
 
-  @IsString()
   readonly nickName: string;
 
   @IsString()
@@ -34,6 +34,7 @@ export class UserDto extends Base {
   readonly password: string;
 
   readonly roles: Role[];
+  readonly topics: Topic[];
 
   readonly avatar: string;
   readonly from: string;

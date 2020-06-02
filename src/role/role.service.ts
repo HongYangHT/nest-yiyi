@@ -3,15 +3,20 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-21 14:51:11
- * @LastEditTime: 2020-05-21 18:27:48
+ * @LastEditTime: 2020-06-01 16:03:03
  */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Role } from './role.entity';
 import { User } from '../user/user.entity';
-import { Transaction, TransactionManager, EntityManager, TransactionRepository } from 'typeorm';
+import { Transaction, TransactionManager, EntityManager } from 'typeorm';
 import { ErrorCode } from '../utils/error-code';
+
+interface BindRoleDto {
+    user_id: string;
+    role_id: string;
+}
 
 @Injectable()
 export class RoleService {
@@ -25,7 +30,7 @@ export class RoleService {
     }
 
     @Transaction()
-    async bind(manager: EntityManager, body: any) {
+    async bind(body: BindRoleDto, @TransactionManager() manager?: EntityManager) {
         const { user_id, role_id } = body;
         const user: User = await manager.findOne(User, user_id, {
             relations: ['roles'],
@@ -36,7 +41,6 @@ export class RoleService {
         }
         user.roles = [...user.roles, role];
         await manager.save(user);
-        // await manager.update<User>(User, user.id, user);
         return user;
     }
 }

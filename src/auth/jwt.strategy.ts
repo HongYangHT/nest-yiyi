@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:27:34
- * @LastEditTime: 2020-05-19 11:38:08
+ * @LastEditTime: 2020-06-01 10:49:44
  */
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     async validate(payload: any) {
         const user = await this.authService.validateToken({
-            id: payload.sub, username: payload.username,
+            id: payload.id, username: payload.username,
         });
         if (!user) {
             throw new UnauthorizedException('身份验证失败');

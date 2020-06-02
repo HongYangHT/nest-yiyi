@@ -3,10 +3,11 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 16:17:19
- * @LastEditTime: 2020-05-30 11:34:04
+ * @LastEditTime: 2020-06-02 09:44:14
  */ 
-import { Entity, Column, ManyToOne, ManyToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
 import { Base } from '../base/base.entity';
+import { User } from '../user/user.entity';
 
 @Entity()
 export class Topic extends Base {
@@ -24,4 +25,8 @@ export class Topic extends Base {
 
     @Column('varchar', { comment: '访问链接' })
     url: string;
+
+    @ManyToMany(type => User, user => user.topics)
+    @JoinTable()
+    users: User[];
 }

@@ -3,19 +3,20 @@
  * @LastEditors: sam.hongyang
  * @Description: user entity
  * @Date: 2019-11-08 21:50:39
- * @LastEditTime: 2020-05-21 15:27:39
+ * @LastEditTime: 2020-06-01 16:23:56
  */
 import { Entity, Column, OneToMany, JoinColumn, JoinTable, ManyToMany } from 'typeorm';
 import { Base } from '../base/base.entity';
 import { Exclude } from 'class-transformer';
 import { Role } from '../role/role.entity';
+import { Topic } from '../topic/topic.entity';
 
 @Entity()
 export class User extends Base {
   @Column('varchar', { length: 160, unique: true, comment: '用户名' })
   username: string;
 
-  @Column('varchar', { length: 160, comment: '昵称' })
+  @Column('varchar', { length: 160, comment: '昵称', default: '' })
   nickName: string;
 
   @Column('varchar', { length: 160, comment: '密码' })
@@ -31,4 +32,7 @@ export class User extends Base {
   @ManyToMany(type => Role, role => role.users)
   @JoinTable()
   roles: Role[];
+
+  @ManyToMany(type => Topic, topic => topic.users)
+  topics: Topic[];
 }

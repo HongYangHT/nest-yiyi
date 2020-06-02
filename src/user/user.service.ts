@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2019-11-08 21:54:00
- * @LastEditTime: 2020-05-21 17:51:16
+ * @LastEditTime: 2020-05-30 17:17:48
  */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,10 +30,13 @@ export class UserService {
       where: {
         username,
       },
+      relations: ['roles'],
     });
   }
 
   async findById(id: string): Promise<User> {
-    return await this.userRepository.findOne(id);
+    return await this.userRepository.findOne(id, {
+      relations: ['roles'],
+    });
   }
 }
