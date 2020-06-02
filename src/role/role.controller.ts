@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-21 14:50:58
- * @LastEditTime: 2020-06-01 15:59:42
+ * @LastEditTime: 2020-06-02 14:28:46
  */ 
 import { Controller, UseGuards, Res, Post, Body, ValidationPipe, UsePipes, HttpStatus } from '@nestjs/common';
 import { RoleService } from './role.service';
@@ -21,15 +21,11 @@ export class RoleController {
         private readonly userService: UserService) {}
     @Post('add')
     @UsePipes(new ValidationPipe({ transform: true }))
-    async create(@Res() res, @Body() roleDto: RoleDto) {
+    async create(@Body() roleDto: RoleDto) {
         const role: Role = await this.roleService.create(roleDto);
-        res.status(HttpStatus.CREATED).send({
-            status: HttpStatus.OK,
-            success: '请求完成',
-            data: {
-                role: classToPlain(role),
-            },
-        });
+        return {
+            role: classToPlain(role),
+        };
     }
 
     @Post('bind')

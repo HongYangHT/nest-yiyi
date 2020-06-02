@@ -3,10 +3,9 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-21 10:24:58
- * @LastEditTime: 2020-05-21 10:47:31
- */ 
+ * @LastEditTime: 2020-06-02 11:28:40
+ */
 import { Logger } from '@nestjs/common';
-import { Log4jsService } from '@quickts/nestjs-log4js';
 
 export class MyLoggerService {
     private readonly logger = new Logger('MyLoggerService');

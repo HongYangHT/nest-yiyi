@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-09 18:04:57
- * @LastEditTime: 2020-06-01 16:19:25
+ * @LastEditTime: 2020-06-02 14:28:25
  */
 import { Controller, Request, Post, UseGuards, Get, Body, Res, HttpStatus, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -29,7 +29,7 @@ export class AuthController {
     }
 
     @Post('signin')
-    async signin(@Res() res, @Body() userDto: UserDto) {
+    async signin(@Body() userDto: UserDto) {
         const salt = bcrypt.genSaltSync(10);
         userDto = {
             ...userDto,
@@ -39,13 +39,9 @@ export class AuthController {
             ...userDto,
             from: '1',
         });
-        res.status(HttpStatus.CREATED).send({
-            status: HttpStatus.OK,
-            success: '请求完成',
-            data: {
-                user: classToPlain(plainToClass(User, user)),
-            },
-        });
+        return {
+            user: classToPlain(plainToClass(User, user)),
+        };
     }
 
     /**

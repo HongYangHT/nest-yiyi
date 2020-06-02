@@ -3,11 +3,10 @@
  * @LastEditors: sam.hongyang
  * @Description: 入口文件
  * @Date: 2019-11-08 20:51:05
- * @LastEditTime: 2020-05-29 11:09:04
+ * @LastEditTime: 2020-06-02 14:03:36
  */
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { Log4jsService } from '@quickts/nestjs-log4js';
+import { ApplicationModule } from './app.module';
 import helmet from 'helmet';
 // import csurf from 'csurf';
 import rateLimit from 'express-rate-limit';
@@ -17,8 +16,7 @@ import ExceptionsFilter from './utils/exception.filter';
 import ResponseInterceptor from './utils/response.interceptor';
 
 async function bootstrap() {
-  const logger = new Log4jsService();
-  const app = await NestFactory.create(AppModule, { logger });
+  const app = await NestFactory.create(ApplicationModule);
   app.setGlobalPrefix('api/v1');
   app.useGlobalFilters(new ExceptionsFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
