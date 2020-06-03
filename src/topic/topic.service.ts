@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 16:16:15
- * @LastEditTime: 2020-06-01 15:58:13
+ * @LastEditTime: 2020-06-03 20:09:57
  */ 
 import { Topic } from './topic.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -16,6 +16,7 @@ interface Query {
     page?: number;
     pageSize?: number;
     keyword?: string;
+    from?: string;
 }
 
 interface AuthDto {
@@ -48,7 +49,7 @@ export class TopicService {
         });
     }
 
-    async findAll(query: Query = { page: 1, pageSize: 10 }): Promise<[Topic[], number]> {
+    async findAll(query: Query = { page: 1, pageSize: 10, from: '' }): Promise<[Topic[], number]> {
         // return await this.topicRepository.findAndCount({
         //     skip: (+query.page - 1) * +query.pageSize,
         //     take: +query.pageSize,
@@ -63,6 +64,10 @@ export class TopicService {
                 .setParameters({
                     param: `%${query.keyword}%`,
                 })
+                .andWhere('topic.from = :param or :param=""')
+                .setParameters({
+                    param: `${query.from}`,
+                })
                 .offset((+query.page - 1) * +query.pageSize)
                 .limit(+query.pageSize)
                 .leftJoinAndSelect('topic.users', 'users')
@@ -70,6 +75,10 @@ export class TopicService {
                 .getManyAndCount();
         } else {
             return await this.topicRepository.createQueryBuilder('topic')
+            .andWhere('topic.from = :param or :param=""')
+            .setParameters({
+                param: `${query.from}`,
+            })
             .offset((+query.page - 1) * +query.pageSize)
             .limit(+query.pageSize)
             .leftJoinAndSelect('topic.users', 'users')

@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 17:05:13
- * @LastEditTime: 2020-06-01 09:45:24
+ * @LastEditTime: 2020-06-03 19:01:02
  */ 
 import { Injectable, Logger, ValidationPipe, UsePipes } from '@nestjs/common';
 import { TopicDto } from '../topic/topic.dto';
@@ -30,6 +30,7 @@ export class SpiderParserService {
                 content: $(ele).find('.article-excerpt').text().trim(),
                 url: 'https://segmentfault.com' + ($(ele).find('.news-img').attr('href') || $(ele).find('.news__item-info>a').attr('href')),
                 commit: $(ele).find('.author').text().trim(),
+                from: 'sf',
             });
             items.push(item);
         });
@@ -73,6 +74,7 @@ export class SpiderParserService {
                 content: '',
                 url: n.node.originalUrl,
                 commit: n.node.user.username + ' ' + dayjs(n.node.updatedAt).format('MM-DD'),
+                from: 'juejin',
             });
         });
         return items;
@@ -93,6 +95,7 @@ export class SpiderParserService {
                 url: $(ele).find('h2 a').attr('href'),
                 commit: $(ele).find('.article-content-meta .author-name').text().trim()
                     + ' ' + $(ele).find('.article-publication-meta time').text().trim(),
+                from: 'cssTricks',
             });
             items.push(item);
         });
@@ -115,6 +118,7 @@ export class SpiderParserService {
                 content: n.content,
                 url: n.url,
                 commit: n.author.name + ' ' + dayjs(n.updated).format('YYYY-MM-DD'),
+                from: 'zhihu',
             });
         });
         return items;

@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 16:16:58
- * @LastEditTime: 2020-06-01 10:36:36
+ * @LastEditTime: 2020-06-03 18:25:38
  */ 
 import { Base } from '../base/base.dto';
 import { IsString, Length } from 'class-validator';
@@ -21,6 +21,8 @@ export class TopicDto extends Base {
     readonly commit: string;
 
     readonly url: string;
+
+    readonly from: string;
 
     readonly users: User[];
 }
