@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 17:05:13
- * @LastEditTime: 2020-06-03 19:01:02
+ * @LastEditTime: 2020-06-04 09:27:28
  */ 
 import { Injectable, Logger, ValidationPipe, UsePipes } from '@nestjs/common';
 import { TopicDto } from '../topic/topic.dto';
@@ -117,7 +117,7 @@ export class SpiderParserService {
                 title: n.title,
                 content: n.content,
                 url: n.url,
-                commit: n.author.name + ' ' + dayjs(n.updated).format('YYYY-MM-DD'),
+                commit: n.author.name + ' ' + dayjs(new Date().getTime() - n.updated).format('YYYY-MM-DD'),
                 from: 'zhihu',
             });
         });
