@@ -3,9 +3,9 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 16:17:19
- * @LastEditTime: 2020-06-03 18:25:15
+ * @LastEditTime: 2020-06-04 10:09:53
  */ 
-import { Entity, Column, ManyToOne, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, JoinColumn, JoinTable, Index } from 'typeorm';
 import { Base } from '../base/base.entity';
 import { User } from '../user/user.entity';
 
@@ -26,6 +26,7 @@ export class Topic extends Base {
     @Column('varchar', { comment: '访问链接' })
     url: string;
 
+    @Index()
     @Column('varchar', { comment: '来源'})
     from: string;
 
