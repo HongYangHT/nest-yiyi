@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 16:16:15
- * @LastEditTime: 2020-06-03 20:09:57
+ * @LastEditTime: 2020-06-08 11:19:13
  */ 
 import { Topic } from './topic.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -71,7 +71,7 @@ export class TopicService {
                 .offset((+query.page - 1) * +query.pageSize)
                 .limit(+query.pageSize)
                 .leftJoinAndSelect('topic.users', 'users')
-                .orderBy('topic.updated', 'DESC')
+                .orderBy('topic.created', 'DESC')
                 .getManyAndCount();
         } else {
             return await this.topicRepository.createQueryBuilder('topic')
@@ -82,7 +82,7 @@ export class TopicService {
             .offset((+query.page - 1) * +query.pageSize)
             .limit(+query.pageSize)
             .leftJoinAndSelect('topic.users', 'users')
-            .orderBy('topic.updated', 'DESC')
+            .orderBy('topic.created', 'DESC')
             .getManyAndCount();
         }
     }
