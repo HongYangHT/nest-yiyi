@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-06-04 17:02:38
- * @LastEditTime: 2020-06-04 17:19:49
+ * @LastEditTime: 2020-06-08 15:08:05
  */ 
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
@@ -17,10 +17,10 @@ export class RemindService {
         {
             msgtype: 'text',
             text: {
-                content: `点餐提醒：@18801365519；@18969136460, 还不点餐，又不想加班嘛？`,
+                content: `点餐提醒：@18969136460, 还不点餐，又不想加班嘛？`,
             },
             at: {
-                atMobiles: ['18801365519', '18969136460'],
+                atMobiles: ['18969136460'],
                 isAtAll: false,
             },
         }, {

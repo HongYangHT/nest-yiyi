@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-29 11:18:05
- * @LastEditTime: 2020-06-04 17:37:26
+ * @LastEditTime: 2020-06-08 15:07:46
  */ 
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
@@ -22,7 +22,7 @@ export class ScheduleService {
         this.spiderService.fetchResource();
     }
 
-    @Cron('0 */30 15-16 * * 1-5')
+    @Cron('0 30 16 * * 1-5')
     remindCheckDincan() {
         this.remindService.sendRemind();
     }
