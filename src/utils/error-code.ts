@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-05-18 17:05:50
- * @LastEditTime: 2020-06-01 11:00:52
+ * @LastEditTime: 2020-06-10 11:13:47
  */
 export enum ErrorCode {
     USER_NOT_FOUND = '10001',
@@ -18,5 +18,6 @@ export enum ErrorCode {
     // 验证信息
     USERNAME_IS_EMPTY = '20001',
 
-
+    // 上传文件格式不对
+    FILE_NOT_SUIT = '30001',
 }

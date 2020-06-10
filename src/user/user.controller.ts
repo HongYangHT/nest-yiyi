@@ -3,9 +3,9 @@
  * @LastEditors: sam.hongyang
  * @Description: user service
  * @Date: 2019-11-08 21:56:54
- * @LastEditTime: 2020-06-02 14:36:26
+ * @LastEditTime: 2020-06-10 10:53:54
  */
-import { Controller, Post, Body, Res, HttpStatus, Get, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get, UsePipes, ValidationPipe, UseGuards, Query, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './user.dto';
 import { classToPlain, plainToClass } from 'class-transformer';
@@ -37,6 +37,22 @@ export class UserController {
     const user: User[] = await this.userService.findAll();
     return {
       user: classToPlain(user),
+    };
+  }
+
+  @Get(':id')
+  async fetchById(@Param() params) {
+    const user: User = await this.userService.findById(params.id);
+    return {
+      user: classToPlain(user),
+    };
+  }
+
+  @Post('update')
+  async update(@Body() userDto: UserDto) {
+    const result: { raw: any; affected?: number; } = await this.userService.update(userDto);
+    return {
+      result,
     };
   }
 }
