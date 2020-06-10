@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 异常过滤器
  * @Date: 2019-11-30 20:50:37
- * @LastEditTime: 2020-06-02 14:51:12
+ * @LastEditTime: 2020-06-10 20:10:03
  */
 import {
   Catch,
@@ -33,6 +33,12 @@ export default class ExceptionsFilter implements ExceptionFilter {
       statusCode: exception.status,
     };
 
+    const ip = request.headers['X-Real-IP'] ||
+        request.headers['x-forwarded-for'] ||
+        request.connection.remoteAddress ||
+        request.socket.remoteAddress ||
+        request.connection.socket.remoteAddress;
+
     const status =
       exception instanceof HttpException
         ? exception.getStatus()
@@ -41,7 +47,7 @@ export default class ExceptionsFilter implements ExceptionFilter {
     const logFormat = `************************************************************************* \n
     Request original url: ${request.originalUrl}
     Method: ${request.method}
-    IP: ${request.ip}
+    IP: ${ip}
     Status code: ${status}
     Response: ${exception.toString()} \n ************************************************************************* \n
     `;

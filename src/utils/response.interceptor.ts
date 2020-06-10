@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2019-11-30 20:57:22
- * @LastEditTime: 2020-06-02 14:50:19
+ * @LastEditTime: 2020-06-10 20:11:49
  */
 import {
   Injectable, NestInterceptor, ExecutionContext, CallHandler,
@@ -26,10 +26,15 @@ export default class ResponseInterceptor<T>
     return next.handle().pipe(
       map(rawData => {
         const req = context.getArgByIndex(1).req;
+        const ip = req.headers['X-Real-IP'] ||
+        req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
         const logFormat = `************************************************************************* \n
         Request original url: ${req.originalUrl}
         Method: ${req.method}
-        IP: ${req.ip}
+        IP: ${ip}
         User: \n ${JSON.stringify(req.user)} \n
         Response data: \n ${JSON.stringify(rawData)} \n ************************************************************************* \n`;
         Logger.info(logFormat);
