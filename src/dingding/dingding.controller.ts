@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-06-17 09:52:33
- * @LastEditTime: 2020-06-17 11:15:35
+ * @LastEditTime: 2020-06-17 11:18:18
  */ 
 import { Controller, Get, Query, Res, HttpStatus } from '@nestjs/common';
 import { MyLoggerService } from '../utils/log';
@@ -15,7 +15,7 @@ export class DingdingController {
     @Get('tip')
     async setVoice(@Res() res, @Query() query) {
         this.myLoggerService.write(query);
-        return res.status(HttpStatus.OK).send({
+        res.status(HttpStatus.OK).send({
             code: 0,
             message: 'OK',
             data: {
