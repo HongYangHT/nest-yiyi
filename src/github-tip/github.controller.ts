@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 11:51:02
- * @LastEditTime: 2020-07-01 18:09:27
+ * @LastEditTime: 2020-07-01 18:37:28
  */ 
 import { Controller, Post, Res, Req, HttpStatus } from '@nestjs/common';
 import { MyLoggerService } from '../utils/log';
@@ -39,6 +39,7 @@ export class GithubController {
             throw new Error('no Auth');
         }
 
+        Logger.info('验证成功，准备打包部署');
         if (event === 'push') {
             this.githubService.deploy(repository.name);
         }

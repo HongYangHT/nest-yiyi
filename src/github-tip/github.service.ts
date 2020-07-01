@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 17:58:25
- * @LastEditTime: 2020-07-01 18:23:34
+ * @LastEditTime: 2020-07-01 18:41:39
  */ 
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
@@ -34,8 +34,13 @@ export class GithubService {
 
     runCmd(cmd: string, args: string[], pwd?: string) {
         return new Promise((resolve, reject) => {
+            if (pwd) {
+                process.chdir(pwd);
+            }
+            Logger.info(`${cmd} ${args} ${pwd}`);
             const shell = spawn(cmd, args, {
-                cwd: pwd,
+                stdio: 'inherit',
+                shell: true,
             });
             shell.stdout.on('data', (e) => Logger.info(e.toString()));
             shell.stderr.on('data', (e) => Logger.info(e.toString()));
