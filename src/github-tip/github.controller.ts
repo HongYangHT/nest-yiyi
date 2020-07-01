@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 11:51:02
- * @LastEditTime: 2020-07-01 12:19:57
+ * @LastEditTime: 2020-07-01 12:27:44
  */ 
 import { Controller, Post, Res } from '@nestjs/common';
 import { MyLoggerService } from '../utils/log';
@@ -47,5 +47,9 @@ export class GithubController {
             ${event.payload.issue.number}
             ${event.payload.issue.title}`);
         });
+
+        return {
+            data: '支撑成功',
+        }
     }
 }
