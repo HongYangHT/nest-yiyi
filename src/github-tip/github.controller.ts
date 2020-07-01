@@ -3,9 +3,9 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 11:51:02
- * @LastEditTime: 2020-07-01 17:07:45
+ * @LastEditTime: 2020-07-01 17:25:36
  */ 
-import { Controller, Post, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Res, Req, HttpStatus } from '@nestjs/common';
 import { MyLoggerService } from '../utils/log';
 import { spawn } from 'child_process';
 import createHandler from 'github-webhook-handler';
@@ -17,9 +17,13 @@ export class GithubController {
         private readonly myLoggerService: MyLoggerService,
     ) {}
     @Post('tip')
-    async postTip() {
+    async postTip(@Res() res, @Req() req) {
         await new Promise((resolve, reject) => {
             const handler = createHandler({ path: '/api/v1/github/tip', secret: 'Hong@410g' });
+            handler(res, req, error => {
+                Logger.info(`Error: no such location`);
+                res.status(HttpStatus.NOT_FOUND).end('Error: no such location');
+            });
             handler.on('error', err => {
                 this.myLoggerService.write(`Error: ${ err.message }`);
                 Logger.info(`Error: ${ err.message }`);
