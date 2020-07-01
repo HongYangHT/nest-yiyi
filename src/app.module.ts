@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 根module
  * @Date: 2019-11-08 20:51:05
- * @LastEditTime: 2020-06-17 09:58:51
+ * @LastEditTime: 2020-07-01 12:18:07
  */
 import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,6 +16,7 @@ import { TopicModule } from './topic/topic.module';
 import { FileModule } from './file/file.module';
 import { WeatherModule } from './weather/weather.module';
 import { DingdingModule } from './dingding/dingding.module';
+import { GithubModule } from './github-tip/github.module';
 
 // NOTE: 定时任务
 import { ScheduleModule } from '@nestjs/schedule';
@@ -25,17 +26,19 @@ import { LoggerMiddleware } from './utils/log-middleware';
 
 import { MyLoggerService } from './utils/log';
 
+import { RolesGuard } from './utils/role.guard';
+
 @Module({
   imports: [TypeOrmModule.forRoot(), ScheduleModule.forRoot(),
-    /* BullModule.registerQueue({
-      name: 'yiyi',
-      redis: {
-        host: 'http://119.23.214.172',
-        port: 6379,
-      },
-    }), */ UserModule, AuthModule, RoleModule, ScheduleCustomModule, TopicModule, FileModule, WeatherModule, DingdingModule],
-    providers: [MyLoggerService],
-    exports: [MyLoggerService],
+  /* BullModule.registerQueue({
+    name: 'yiyi',
+    redis: {
+      host: 'http://119.23.214.172',
+      port: 6379,
+    },
+  }), */ UserModule, AuthModule, RoleModule, ScheduleCustomModule, TopicModule, FileModule, WeatherModule, DingdingModule, GithubModule],
+  providers: [MyLoggerService, RolesGuard],
+  exports: [MyLoggerService],
 })
 export class ApplicationModule implements NestModule {
   constructor(

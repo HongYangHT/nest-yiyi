@@ -5,6 +5,7 @@
  * @Date: 2019-11-08 20:51:05
  * @LastEditTime: 2020-06-02 14:03:36
  */
+
 import { NestFactory } from '@nestjs/core';
 import { ApplicationModule } from './app.module';
 import helmet from 'helmet';
@@ -14,6 +15,7 @@ import rateLimit from 'express-rate-limit';
 import ValidatePipe from './utils/validate.pipe';
 import ExceptionsFilter from './utils/exception.filter';
 import ResponseInterceptor from './utils/response.interceptor';
+// import { RolesGuard } from './utils/role.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule);
@@ -23,6 +25,9 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidatePipe(),
   );
+  // 不能使用全局的，因为我使用的是jwt模式
+  // const rolesGuard = app.get(RolesGuard);
+  // app.useGlobalGuards(rolesGuard);
   app.use(helmet());
   app.enableCors();
   // app.use(csurf({
