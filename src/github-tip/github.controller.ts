@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 11:51:02
- * @LastEditTime: 2020-07-02 10:11:32
+ * @LastEditTime: 2020-07-02 10:48:53
  */ 
 import { Controller, Post, Res, Req, HttpStatus } from '@nestjs/common';
 import { MyLoggerService } from '../utils/log';
@@ -19,7 +19,7 @@ export class GithubController {
         private readonly githubService: GithubService,
     ) {}
     @Post('tip')
-    async postTip(@Res() res, @Req() req) {
+    postTip(@Res() res, @Req() req) {
         const { headers } = req;
         const delivery = headers['x-github-delivery'];
         const signature = headers['x-hub-signature'];
@@ -43,9 +43,12 @@ export class GithubController {
         if (event === 'push') {
             this.githubService.deploy(repository.name);
         }
-        const result = await new Promise((resolve, reject) => {
-            resolve({ message: '更新成功' });
+        res.status(HttpStatus.OK).send({
+            code: 0,
+            message: 'ok',
+            data: {
+                message: '更新成功',
+            },
         });
-        return result;
     }
 }
