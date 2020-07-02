@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 17:58:25
- * @LastEditTime: 2020-07-02 09:54:37
+ * @LastEditTime: 2020-07-02 10:01:02
  */ 
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
@@ -54,7 +54,7 @@ export class GithubService {
                 }
                 resolve(code);
             });
-            resolve();
+            // resolve();
         });
     }
 }
