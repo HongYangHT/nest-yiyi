@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: function description
  * @Date: 2020-07-01 17:58:25
- * @LastEditTime: 2020-07-01 19:09:18
+ * @LastEditTime: 2020-07-02 09:54:37
  */ 
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
@@ -43,8 +43,9 @@ export class GithubService {
                 stdio: 'inherit',
                 shell: true,
             });
-            shell.stdout.on('data', (e) => Logger.info(e.toString()));
-            shell.stderr.on('data', (e) => Logger.info(e.toString()));
+            Logger.info(`${cmd} ${args} ${pwd} 3`);
+            // shell.stdout.on('data', (e) => Logger.info(e.toString()));
+            // shell.stderr.on('data', (e) => Logger.info(e.toString()));
             shell.on('close', (code) => {
                 if (code !== 0) {
                     Logger.info(`${cmd} ${args} error, code: ${code}`);
@@ -53,6 +54,7 @@ export class GithubService {
                 }
                 resolve(code);
             });
+            resolve();
         });
     }
 }
