@@ -3,7 +3,7 @@
  * @LastEditors: sam.hongyang
  * @Description: 根module
  * @Date: 2019-11-08 20:51:05
- * @LastEditTime: 2020-07-01 12:18:07
+ * @LastEditTime: 2020-07-03 11:56:02
  */
 import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,6 +17,9 @@ import { FileModule } from './file/file.module';
 import { WeatherModule } from './weather/weather.module';
 import { DingdingModule } from './dingding/dingding.module';
 import { GithubModule } from './github-tip/github.module';
+import { AuthorModule } from './author/author.module';
+import { ResumeModule } from './resume/resume.module';
+import { EducationModule } from './education/education.module';
 
 // NOTE: 定时任务
 import { ScheduleModule } from '@nestjs/schedule';
@@ -36,7 +39,20 @@ import { RolesGuard } from './utils/role.guard';
       host: 'http://119.23.214.172',
       port: 6379,
     },
-  }), */ UserModule, AuthModule, RoleModule, ScheduleCustomModule, TopicModule, FileModule, WeatherModule, DingdingModule, GithubModule],
+  }), */
+  UserModule,
+  AuthModule,
+  RoleModule,
+  ScheduleCustomModule,
+  TopicModule,
+  FileModule,
+  WeatherModule,
+  DingdingModule,
+  GithubModule,
+  AuthorModule,
+  ResumeModule,
+  EducationModule,
+],
   providers: [MyLoggerService, RolesGuard],
   exports: [MyLoggerService],
 })
