@@ -60,7 +60,7 @@
     "tslib": "^1.11.2",
     "typeorm": "^0.2.20",
     "typescript": "^3.0.1",
-    "wechaty": "^0.40.6"
+    "wechaty": "^1.20.2"
   },
   "devDependencies": {
     "@nestjs/platform-express": "^7.1.1",
