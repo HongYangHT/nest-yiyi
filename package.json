@@ -63,7 +63,7 @@
     "wechaty": "^1.20.2"
   },
   "devDependencies": {
-    "@nestjs/platform-express": "^7.1.1",
+    "@nestjs/platform-express": "^9.2.1",
     "@nestjs/testing": "^5.1.0",
     "@quickts/nestjs-log4js": "^1.0.5",
     "@types/bull": "^3.13.0",
