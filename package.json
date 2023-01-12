@@ -35,7 +35,7 @@
     "bcrypt": "^5.0.0",
     "bull": "^3.14.0",
     "cheerio": "^1.0.0-rc.3",
-    "class-validator": "^0.13.2",
+    "class-validator": "^0.14.0",
     "csurf": "^1.10.0",
     "dayjs": "^1.8.26",
     "express-rate-limit": "^5.0.0",
